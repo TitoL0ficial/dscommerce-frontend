@@ -3,7 +3,7 @@ import ButtonInverse from "../../../components/ButtonInverse";
 import ButtonPrimary from "../../../components/ButtonPrimary";
 import ProductDetailsCard from "../../../components/ProductDetailsCard";
 import * as productService from "../../../services/product-service";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 
 export default function ProductDetails () {
@@ -21,7 +21,9 @@ export default function ProductDetails () {
             }           
             <div className="dsc-btn-page-container">
                 <ButtonPrimary text="Comprar"/>
-                <ButtonInverse text="Início"/>
+                <Link to="/">
+                    <ButtonInverse text="Início"/>
+                </Link>
             </div>
             </section>
         </main>
