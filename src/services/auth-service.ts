@@ -25,7 +25,7 @@ export function loginRequest(loginData: CredentialsDTO) {
 }
 
 export function logout() {
-    return accessTokenRepository.remove();
+    accessTokenRepository.remove();
 }
 
 export function saveAccessToken(token: string) {
@@ -33,5 +33,5 @@ export function saveAccessToken(token: string) {
 }
 
 export function getAccessToken() {
-    accessTokenRepository.get();
+    return accessTokenRepository.get();
 }
