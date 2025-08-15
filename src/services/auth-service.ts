@@ -3,6 +3,7 @@ import type { CredentialsDTO } from "../models/auth";
 import { CLIENT_ID, CLIENT_SECRET } from "../utils/system";
 import type { AxiosRequestConfig } from "axios";
 import { requestBackend } from "../utils/requests";
+import * as accessTokenRepository from '../localStorage/access-token-repository';
 
 export function loginRequest(loginData: CredentialsDTO) {
 
@@ -10,7 +11,6 @@ export function loginRequest(loginData: CredentialsDTO) {
         "Content-Type": "application/x-www-form-urlencoded",
         Authorization: "Basic " + window.btoa(CLIENT_ID + ":" + CLIENT_SECRET)
     }
-
 
     const requestBody = QueryString.stringify({...loginData, grant_type: "password"});
 
@@ -22,4 +22,16 @@ export function loginRequest(loginData: CredentialsDTO) {
     }
 
     return requestBackend(config);
+}
+
+export function logout() {
+    return accessTokenRepository.remove();
+}
+
+export function saveAccessToken(token: string) {
+    accessTokenRepository.save(token);
+}
+
+export function getAccessToken() {
+    accessTokenRepository.get();
 }
