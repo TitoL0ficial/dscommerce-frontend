@@ -1,10 +1,35 @@
-import './styles.css';
-import searchButton from '../../../assets/search-button.svg';
-import computer from '../../../assets/computer.png';
-import editIcon from '../../../assets/pen.svg';
-import deleteIcon from '../../../assets/trash.svg';
+import "./styles.css";
+import searchButton from "../../../assets/search-button.svg";
+import editIcon from "../../../assets/pen.svg";
+import deleteIcon from "../../../assets/trash.svg";
+import { useEffect, useState } from "react";
+import * as productService from "../../../services/product-service";
+import type { ProductDTO } from "../../../models/product";
+
+type QueryParams = {
+  page: number;
+  name: string;
+};
 
 export default function ProductListing() {
+
+    const [isLastPage, setIsLastPage] = useState(false);
+    
+    const [products, setProducts] = useState<ProductDTO[]>([]);
+
+    const [queryParams, setQueryParams] = useState<QueryParams>({
+        page: 0,
+        name: "",
+    });
+
+    useEffect(() => {
+        productService.findPageRequest(queryParams.page, queryParams.name)
+            .then((response) => {
+                const nextPage = response.data.content;
+                setProducts(products.concat(nextPage));
+                setIsLastPage(response.data.last);
+            });
+    }, [queryParams]);
 
     return (
         <main>
@@ -16,10 +41,10 @@ export default function ProductListing() {
                 </div>
 
                 <div className="dsc-search-bar">
-                    <form className="dsc-form-search dsc-container" >
-                        <input           
+                    <form className="dsc-form-search dsc-container">
+                        <input
                             type="text" 
-                            placeholder="Nome do produto"  
+                            placeholder="Nome do produto" 
                         />
                         <button className="dsc-button-search" type="submit">
                             <img src={searchButton} alt="icon" />
@@ -35,34 +60,22 @@ export default function ProductListing() {
                             <th className="dsc-tb768">Preço</th>
                             <th className="dsc-txt-left">Nome</th>
                             <th></th>
-                            <th></th>  
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td className="dsc-tb576">341</td>
-                            <td><img className="dsc-product-listing-image" src={computer} alt="Computer"/></td>
-                            <td className="dsc-tb768">R$ 5000,00</td>
-                            <td className="dsc-txt-left">Computador Gamer XT Plus Ultra</td>
-                            <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar"/></td>
-                            <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar"/></td>
-                        </tr>
-                        <tr>
-                            <td className="dsc-tb576">341</td>
-                            <td><img className="dsc-product-listing-image" src={computer} alt="Computer"/></td>
-                            <td className="dsc-tb768">R$ 5000,00</td>
-                            <td className="dsc-txt-left">Computador Gamer XT Plus Ultra</td>
-                            <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar"/></td>
-                            <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar"/></td>
-                        </tr>
-                        <tr>
-                            <td className="dsc-tb576">341</td>
-                            <td><img className="dsc-product-listing-image" src={computer} alt="Computer"/></td>
-                            <td className="dsc-tb768">R$ 5000,00</td>
-                            <td className="dsc-txt-left">Computador Gamer XT Plus Ultra</td>
-                            <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar"/></td>
-                            <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar"/></td>
-                        </tr>
+                        {
+                            products.map(product => (
+                                <tr>
+                                    <td className="dsc-tb576">{product.id}</td>
+                                    <td><img className="dsc-product-listing-image" src={product.imgUrl} alt={product.name}/></td>
+                                    <td className="dsc-tb768">R$ {product.price.toFixed(2)}</td>
+                                    <td className="dsc-txt-left">{product.name}</td>
+                                    <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar"/></td>
+                                    <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar"/></td>
+                                </tr>
+                            ))
+                        }
                     </tbody>
                 </table>
 
