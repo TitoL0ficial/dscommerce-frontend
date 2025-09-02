@@ -1,5 +1,5 @@
 import './styles.css';
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import FormInput from '../../../components/FormInput';
 import * as forms from "../../../utils/forms"
@@ -119,6 +119,10 @@ export default function ProductForm() {
         request
             .then(() => {
                 navigate("/admin/products");
+            })
+            .catch(error => {
+                const newInputs = forms.setBackendErrors(formData, error.response.data.errors);
+                setFormData(newInputs);
             });
     }
 
