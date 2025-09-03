@@ -12,6 +12,8 @@ export default function Login() {
 
     const navigate = useNavigate();
 
+    const [submitResponseFail, setSubmitResponseFail] = useState(false);
+
     const [formData, setFormData] = useState<any>({
         username: {
             value: "",
@@ -34,16 +36,25 @@ export default function Login() {
     });
 
     function handleSubmit(event: any) {
-      event.preventDefault();
-      authService.loginRequest(forms.toValues(formData))
-          .then((response) => {
-              authService.saveAccessToken(response.data.access_token);
-              setContextTokenPayload(authService.getAccessTokenPayload());
-              navigate("/cart");
-          })
-          .catch((error) => {
-              console.log("ERRO no login", error);
-          });
+        event.preventDefault();
+
+        setSubmitResponseFail(false);
+
+        const formDataValidated = forms.dirtyAndValidateAll(formData);
+        if (forms.hasAnyInvalid(formDataValidated)) {
+            setFormData(formDataValidated);
+            return;
+        }
+
+        authService.loginRequest(forms.toValues(formData))
+            .then((response) => {
+                authService.saveAccessToken(response.data.access_token);
+                setContextTokenPayload(authService.getAccessTokenPayload());
+                navigate("/cart");
+            })
+            .catch(() => {
+                setSubmitResponseFail(true);
+            });
     }
 
     function handleInputChange(event: any) {
@@ -55,39 +66,46 @@ export default function Login() {
     }
 
     return (
-      <main>
-          <section id="login-section" className="dsc-container">
-              <div className="dsc-login-form-container">
-                  <form className="dsc-card dsc-form" onSubmit={handleSubmit}>
-                      <h2>Login</h2>
-                      <div className="dsc-form-controls-container">
-                        <div>
-                          <FormInput
-                              { ...formData.username }
-                              className="dsc-form-control"
-                              onTurnDirty={handleTurnDirty}
-                              onChange={handleInputChange}
-                          />
-                          <div className="dsc-form-error">{formData.username.message}</div>
+        <main>
+            <section id="login-section" className="dsc-container">
+                <div className="dsc-login-form-container">
+                    <form className="dsc-card dsc-form" onSubmit={handleSubmit}>
+                        <h2>Login</h2>
+                        <div className="dsc-form-controls-container">
+                            <div>
+                                <FormInput
+                                    { ...formData.username }
+                                    className="dsc-form-control"
+                                    onTurnDirty={handleTurnDirty}
+                                    onChange={handleInputChange}
+                                />
+                                <div className="dsc-form-error">{formData.username.message}</div>
+                            </div>
+                            <div>
+                                <FormInput
+                                    { ...formData.password }
+                                    className="dsc-form-control"
+                                    onTurnDirty={handleTurnDirty}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
                         </div>
-                        <div>
-                          <FormInput
-                              { ...formData.password }
-                              className="dsc-form-control"
-                              onTurnDirty={handleTurnDirty}
-                              onChange={handleInputChange}
-                          />
-                        </div>
-                      </div>
 
-                      <div className="dsc-login-form-buttons dsc-mt20">
-                        <button type="submit" className="dsc-btn dsc-btn-blue">
-                          Entrar
-                        </button>
-                      </div>
-                  </form>
-              </div>
-          </section>
-      </main>
+                        {
+                            submitResponseFail &&
+                            <div className="dsc-form-global-error">
+                                Usuário ou senha inválidos
+                            </div>
+                        }
+
+                        <div className="dsc-login-form-buttons dsc-mt20">
+                            <button type="submit" className="dsc-btn dsc-btn-blue">
+                                Entrar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
     );
 }
