@@ -1,54 +1,50 @@
-# React + TypeScript + Vite
+# DSCommerce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Sobre o projeto
+DSCommerce é uma aplicação web full stack desenvolvida no curso [**DevSuperior**](https://devsuperior.com.br), ministrado pelo **Professor Nélio Alves**.
 
-Currently, two official plugins are available:
+O sistema simula um E-commerce completo, com as seguintes funcionalidade:
+- Busca e catálogo de produtos;
+- Exibição de detalhes de cada produto;
+- Carrinho de compras;
+- Autenticação de usuários (login);
+- Área administrativa exclusiva, permitindo adicionar, editar e excluir produtos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Layout web
+![catalog](https://raw.githubusercontent.com/TitoL0ficial/assets/main/assets/catalog.png) 
+![details](https://raw.githubusercontent.com/TitoL0ficial/assets/main/assets/details.png)
+![cart](https://raw.githubusercontent.com/TitoL0ficial/assets/main/assets/cart.png)
+![login](https://raw.githubusercontent.com/TitoL0ficial/assets/main/assets/login.png)
 
-## Expanding the ESLint configuration
+## Layout área administrativa
+![admin 1](https://raw.githubusercontent.com/TitoL0ficial/assets/main/assets/admin.png)
+![admin 2](https://raw.githubusercontent.com/TitoL0ficial/assets/main/assets/admin-listing.png)
+![admin 3](https://raw.githubusercontent.com/TitoL0ficial/assets/main/assets/editProduct.png)
+![admin 4](https://raw.githubusercontent.com/TitoL0ficial/assets/main/assets/newProduct.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Modelo conceitual
+![Modelo](https://raw.githubusercontent.com/TitoL0ficial/assets/main/assets/modeloConceitual.png)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+# Tecnologias utilizadas
+## Back end
+- Java
+- Spring Boot
+- JPA / Hibernate
+- Maven
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Front end
+- HTML / CSS / JS / TypeScript
+- ReactTS
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Implatação em produção
+- Back end: máquina (Spring Tool Suite)
+- Front end web: Netlify
+- Banco de dados: Postgresql
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+# Autor
+Tito Costa de Lima
+
+https://www.linkedin.com/in/tito-lima-b9a597247/
+
+# Agradecimentos
+Agradeço ao professor Nélio Alves e à escola DevSuperior pelo excelente curso de desenvolvimento Full Stack. Foi aprendido muitas coisas com inúmeros desafios e projetos!
