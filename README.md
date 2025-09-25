@@ -1,54 +1,57 @@
-# React + TypeScript + Vite
+# DSCommerce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Sobre o projeto
+DSCommerce é uma aplicação web full stack.
 
-Currently, two official plugins are available:
+O sistema simula um site de e-commerce com as seguintes funcionalidades:
+#### Área do Usuário
+- Barra de pesquisa;
+- Catálogo;
+- Detalhes de produtos;
+- Carrinho de compras e controle de quantidade;
+- Login de usuário.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#### Área Administrativa
+- Área administrativa com CRUD completo;
+- Botão de adicionar produto;
+- Barra de pesquisa;
+- Botão de editar e excluir produto.
 
-## Expanding the ESLint configuration
+## Layout web
+![image1](https://github.com/TitoL0ficial/assets/blob/3ea87e65f4d6a76ee23a6924a8902fc255d43bcd/assets/catalog.png)
+![image2](https://github.com/TitoL0ficial/assets/blob/3ea87e65f4d6a76ee23a6924a8902fc255d43bcd/assets/details.png)
+![image3](https://github.com/TitoL0ficial/assets/blob/3ea87e65f4d6a76ee23a6924a8902fc255d43bcd/assets/cart.png)
+![image4](https://github.com/TitoL0ficial/assets/blob/3ea87e65f4d6a76ee23a6924a8902fc255d43bcd/assets/login.png)
+![image5](https://github.com/TitoL0ficial/assets/blob/3ea87e65f4d6a76ee23a6924a8902fc255d43bcd/assets/admin.png)
+![image6](https://github.com/TitoL0ficial/assets/blob/3ea87e65f4d6a76ee23a6924a8902fc255d43bcd/assets/admin-listing.png)
+![image7](https://github.com/TitoL0ficial/assets/blob/3ea87e65f4d6a76ee23a6924a8902fc255d43bcd/assets/editProduct.png)
+![image8](https://github.com/TitoL0ficial/assets/blob/3ea87e65f4d6a76ee23a6924a8902fc255d43bcd/assets/newProduct.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Modelo conceitual
+![Modelo](https://github.com/TitoL0ficial/assets/blob/3ea87e65f4d6a76ee23a6924a8902fc255d43bcd/assets/modeloConceitual.png)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+# Tecnologias utilizadas
+## Back end
+- Java
+- Spring Boot
+- JPA / Hibernate
+- Maven
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Front end
+- HTML / CSS / JavaScript | TypeScript
+- React-TS
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Implatação em produção
+- Back end: máquina (Spring Tool Suite)
+- Front end web: Netlify
+- Banco de dados: Postgresql
+
+### LinkedIn
+Para ver o funcionamento da aplicação acesse meu [LinkedIn](https://www.linkedin.com/in/tito-lima-b9a597247) na área de destaques onde se encontra o projeto.
+
+### Autor
+Tito Costa de Lima
+
+### Agradecimentos
+Agradeço ao Professor Nélio Alves e a escola [DevSuperior](https://devsuperior.com.br) pelo excelente curso de desenvolvedor FullStack.
